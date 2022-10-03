@@ -63,7 +63,7 @@ def get_scores(ref):
         #modified part: search for ZINCID
             if key_word_zincid == tmp[:-1]:
                 zinc_id = ref.readline().rstrip()
-            if key_word == tmp[:-1]:
+            if key_word_score == tmp[:-1]:
                 tmpp = float(ref.readline().rstrip())
                 if tmpp > 50 or tmpp < -50:
                     print(zinc_id, tmpp)
