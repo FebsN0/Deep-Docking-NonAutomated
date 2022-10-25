@@ -24,9 +24,9 @@ parser.add_argument('-zincid', '--zincid_keyword', required=True, help='zincid k
 parser.add_argument('-site', '--siteSelected', required=True, help='select the binding site used in this cluster [1,2,3,4]: ')
 #in my work I have more potential binding sites to process
 parser.add_argument('-set', '--datasetSelected', required=True, help='choose the dataset to process [train,test,valid]: ')
+parser.add_argument('-merge', '--mergeBlocks', required=True, help='true if the file.sdf is previously merged because the original number of blocks is over 500, which give error I/O')
 
 io_args = parser.parse_args()
-
 is_final = io_args.is_final
 n_it = int(io_args.iteration_no)
 protein = io_args.protein
@@ -36,6 +36,7 @@ key_word_score = str(io_args.score_keyword)
 key_word_zincid = str(io_args.zincid_keyword)
 siteSel = str(io_args.siteSelected)
 setSel = io_args.datasetSelected
+merge= io_args.mergeBlocks
 
 if is_final == 'False' or is_final == 'false':
     is_final = False
@@ -44,6 +45,11 @@ elif is_final == 'True' or is_final == 'true':
 else:
     raise TypeError('-if parameter must be a boolean (true/false)')
 
+if merge == 'true':
+    merge = True
+elif merge == 'false':
+    merge = False
+    
 # mol_key = 'ZINC'
 print("Keyword Score: ", key_word_score)
 print("Keyword zincid: ", key_word_zincid)
@@ -137,7 +143,10 @@ if __name__ == '__main__':
     if is_final:
         path = file_path + '/' + protein + '/after_iteration/docking/site_'+ siteSel + '/'+ setSel + '/block*/*.sdf*'
     else:
-        path = iter_path + '/docking/site_'+ siteSel + '/'+ setSel + '/block*/*.sdf*'
+        if merge:
+            path = iter_path + '/docking/site_'+ siteSel + '/dock_result_over500blocks_' + setSel +'/*.sdf*'
+        else:
+            path = iter_path + '/docking/site_'+ siteSel + '/'+ setSel + '/block*/*.sdf*'
         path_labels = iter_path + '/*labels*'
 
     for f in glob.glob(path):
