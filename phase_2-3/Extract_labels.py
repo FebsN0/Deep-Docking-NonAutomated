@@ -144,7 +144,7 @@ if __name__ == '__main__':
         path = file_path + '/' + protein + '/after_iteration/docking/site_'+ siteSel + '/'+ setSel + '/block*/*.sdf*'
     else:
         if merge:
-            path = iter_path + '/docking/site_'+ siteSel + '/dock_result_over500blocks_' + setSel +'/*.sdf*'
+            path = iter_path + '/docking/site_'+ siteSel + '/dock_result_blocksChunked_' + setSel +'/*.sdf*'
         else:
             path = iter_path + '/docking/site_'+ siteSel + '/'+ setSel + '/block*/*.sdf*'
         path_labels = iter_path + '/*labels*'
