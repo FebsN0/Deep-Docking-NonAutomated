@@ -1,12 +1,12 @@
 """
 Version 1.1.2
 """
-from Tokenizer import DDTokenizer
+from ML.Tokenizer import DDTokenizer
 from sklearn import preprocessing
-from DDModelExceptions import *
+from ML.DDModelExceptions import *
 from tensorflow.keras import backend
-from Models import Models
-from Parser import Parser
+from ML.Models import Models
+from ML.Parser import Parser
 import tensorflow as tf
 import pandas as pd
 import numpy as np
