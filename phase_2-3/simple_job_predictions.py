@@ -17,6 +17,7 @@ protein = io_args.protein
 n_it = int(io_args.n_it)
 mdd = io_args.morgan_directory
 
+#filepath.
 dp=io_args.file_path
 
 DATA_PATH = dp+'/'+protein  # Now == file_path/protein
@@ -49,13 +50,17 @@ for f in part_files:
     with open(SAVE_PATH + '/iteration_' + str(n_it) + '/simple_job_predictions/simple_job_' + str(ct) + '.sh',
               'w') as ref:
         ref.write('#!/bin/bash\n')
+        ref.write('#SBATCH --account=def-jtus\n#SBATCH --nodes=1\n')
+        ref.write('#SBATCH --gres=gpu:a100:1     \#####  AWARE: MODIFY NAME GPU BASED ON THE USED CLUSTER \#####\n')
+        ref.write('#SBATCH --cpus-per-task=10\n#SBATCH --mem-per-cpu=2G\n#SBATCH --time 05:00:00\n#SBATCH --ntasks=2\n')
+        ref.write('#SBATCH --mail-user=fab.alt@protonmail.com\n#SBATCH --mail-type=BEGIN\n#SBATCH --mail-type=END\n#SBATCH --mail-type=FAIL\n')
+        ref.write('source ~/.bashrc\n')
+        ref.write('module load cuda cudnn\nsource ~/env1/bin/activate\n')
         cwd = os.getcwd()
         ref.write('cd {}\n'.format(cwd))
-        ref.write('source ~/.bashrc\n')
-        ref.write('source activation_script.sh\n')
         ref.write('python -u ' + 'Prediction_morgan_1024.py' + ' ' + '-fn' + ' ' + f.split('/')[
             -1] + ' ' + '-protein' + ' ' + protein + ' ' + '-it' + ' ' + str(n_it) + ' ' + '-mdd' + ' ' + str(
-            mdd) + ' ' + '-file_path' + ' ' + SAVE_PATH + '\n')
+            mdd) + ' ' + '-file_path' + ' ' + dp + '\n')
         ref.write("\n echo complete")
 
     ct += 1
