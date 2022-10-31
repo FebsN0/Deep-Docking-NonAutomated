@@ -17,7 +17,9 @@ protein = io_args.protein
 n_it = int(io_args.n_it)
 mdd = io_args.morgan_directory
 
-DATA_PATH = io_args.file_path  # Now == file_path/protein
+dp=io_args.file_path
+
+DATA_PATH = dp+'/'+protein  # Now == file_path/protein
 SAVE_PATH = io_args.save_path
 # if no save path is provided we just save it in the same location as the data
 if SAVE_PATH is None: SAVE_PATH = DATA_PATH
