@@ -58,7 +58,7 @@ for f in part_files:
         ref.write('module load cuda cudnn\nsource ~/env1/bin/activate\n')
         cwd = os.getcwd()
         ref.write('cd {}\n'.format(cwd))
-        ref.write('python -u ' + 'Prediction_morgan_1024.py' + ' ' + '-fn' + ' ' + f.split('/')[
+        ref.write('python -u ' + '$DEEPDOCKNA/phase_2-3/Prediction_morgan_1024.py' + ' ' + '-fn' + ' ' + f.split('/')[
             -1] + ' ' + '-protein' + ' ' + protein + ' ' + '-it' + ' ' + str(n_it) + ' ' + '-mdd' + ' ' + str(
             mdd) + ' ' + '-file_path' + ' ' + dp + '\n')
         ref.write("\n echo complete")
