@@ -51,7 +51,7 @@ for f in part_files:
               'w') as ref:
         ref.write('#!/bin/bash\n')
         ref.write('#SBATCH --account=def-jtus\n#SBATCH --nodes=1\n')
-        ref.write('#SBATCH --gres=gpu:a100:1     \#####  AWARE: MODIFY NAME GPU BASED ON THE USED CLUSTER \#####\n')
+        ref.write('#SBATCH --gres=gpu:a100:1     #####  AWARE: MODIFY NAME GPU BASED ON THE USED CLUSTER #####\n')
         ref.write('#SBATCH --cpus-per-task=10\n#SBATCH --mem-per-cpu=2G\n#SBATCH --time 05:00:00\n#SBATCH --ntasks=2\n')
         ref.write('#SBATCH --mail-user=fab.alt@protonmail.com\n#SBATCH --mail-type=BEGIN\n#SBATCH --mail-type=END\n#SBATCH --mail-type=FAIL\n')
         ref.write('source ~/.bashrc\n')
