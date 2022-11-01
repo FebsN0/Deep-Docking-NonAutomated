@@ -55,7 +55,7 @@ for f in part_files:
         ref.write('#SBATCH --cpus-per-task=5\n#SBATCH --mem-per-cpu=2G\n#SBATCH --time 05:00:00\n#SBATCH --ntasks=2\n')
         ref.write('#SBATCH --mail-user=fab.alt@protonmail.com\n#SBATCH --mail-type=FAIL\n')
         ref.write('source ~/.bashrc\n')
-        ref.write('module load cuda cudnn\nsource ~/env1/bin/activate\n')
+        ref.write('module load cuda cudnn\nsource ~/envDeepDock/bin/activate\n')
         cwd = os.getcwd()
         ref.write('cd {}\n'.format(cwd))
         ref.write('python -u $DEEPDOCKNA/phase_2-3/Prediction_morgan_1024.py' + ' ' + '-fn' + ' ' + f.split('/')[
