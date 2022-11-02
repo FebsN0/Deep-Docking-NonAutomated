@@ -63,7 +63,7 @@ def prediction_morgan(fname, models, thresh):   # TODO: improve runtime with par
                 for model in models:
                     pred.append(model.predict(X_set))
 
-                with open(file_path+'/iteration_'+str(it)+'/morgan_1024_predictions/'+fname, 'a') as ref:
+                with open(file_path+'/'+protein+'/iteration_'+str(it)+'/morgan_1024_predictions/'+fname, 'a') as ref:
                     for j in range(len(pred[0])):
                         is_pass = 0
                         for i,thr in enumerate(thresh):
@@ -88,7 +88,7 @@ def prediction_morgan(fname, models, thresh):   # TODO: improve runtime with par
             print("(2) Predicting... Time elapsed:", time.time() - t, "seconds.")
             for model in models:
                 pred.append(model.predict(X_set))
-            with open(file_path+'/iteration_'+str(it)+'/morgan_1024_predictions/'+fname, 'a') as ref:
+            with open(file_path+'/'+protein+'/iteration_'+str(it)+'/morgan_1024_predictions/'+fname, 'a') as ref:
                 for j in range(len(pred[0])):
                     is_pass = 0
                     for i,thr in enumerate(thresh):
@@ -103,16 +103,16 @@ def prediction_morgan(fname, models, thresh):   # TODO: improve runtime with par
 
 
 try:
-    os.mkdir(file_path+'/iteration_'+str(it)+'/morgan_1024_predictions')
+    os.mkdir(file_path+'/'+protein+'/iteration_'+str(it)+'/morgan_1024_predictions')
 except OSError:
-    print(file_path+'/iteration_'+str(it)+'/morgan_1024_predictions', "already exists")
+    print(file_path+'/'+protein+'/iteration_'+str(it)+'/morgan_1024_predictions', "already exists")
 
-thresholds = pd.read_csv(file_path+'/iteration_'+str(it)+'/best_models/thresholds.txt', header=None)
+thresholds = pd.read_csv(file_path+'/'+protein+'/iteration_'+str(it)+'/best_models/thresholds.txt', header=None)
 thresholds.columns = ['model_no', 'thresh', 'cutoff']
 
 tr = []
 models = []
-for f in glob.glob(file_path+'/iteration_'+str(it)+'/best_models/model_*'):
+for f in glob.glob(file_path+'/'+protein+'/iteration_'+str(it)+'/best_models/model_*'):
     if "." not in f:    # skipping over the .ddss & .csv files
         mn = int(f.split('/')[-1].split('_')[1])
         tr.append(thresholds[thresholds.model_no == mn].thresh.iloc[0])
@@ -123,5 +123,6 @@ t = time.time()
 returned = prediction_morgan(fn, models, tr)
 print(time.time()-t)
 
-with open(file_path+'/iteration_'+str(it)+'/morgan_1024_predictions/passed_file_ct.txt','a') as ref:
+with open(file_path+'/'+protein+'/iteration_'+str(it)+'/morgan_1024_predictions/passed_file_ct.txt','a') as ref:
         ref.write(fn+','+str(returned)+'\n')
+
