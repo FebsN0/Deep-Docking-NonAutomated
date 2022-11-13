@@ -164,11 +164,11 @@ count = 1
 for i in range(len(all_hyperparas)):
     with open(SAVE_PATH+'/iteration_'+str(n_it)+'/simple_job/simple_job_'+str(count)+'.sh', 'w') as ref:
         ref.write('#!/bin/bash\n')
-	ref.write('#SBATCH --account=def-jtus\n#SBATCH --nodes=1\n')
-	ref.write('#SBATCH --gres=gpu:1     #####  AWARE: MODIFY NAME GPU BASED ON THE USED CLUSTER #####\n')
-	ref.write('#SBATCH --cpus-per-task=8\n#SBATCH --mem-per-cpu=2G\n#SBATCH --time 05:00:00\n#SBATCH --ntasks=1\n')
-	ref.write('#SBATCH --mail-user=fab.alt@protonmail.com\n#SBATCH --mail-type=END\n')
-	ref.write('module load cuda cudnn\nsource ~/envDeepDock/bin/activate\n')
+        ref.write('#SBATCH --account=def-jtus\n#SBATCH --nodes=1\n')
+        ref.write('#SBATCH --gres=gpu:1     #####  AWARE: MODIFY NAME GPU BASED ON THE USED CLUSTER #####\n')
+        ref.write('#SBATCH --cpus-per-task=10\n#SBATCH --mem-per-cpu=2G\n#SBATCH --time 10:00:00\n#SBATCH --ntasks=1\n')
+        ref.write('#SBATCH --mail-user=fab.alt@protonmail.com\n#SBATCH --mail-type=END\n')
+        ref.write('module load cuda cudnn\nsource ~/envDeepDock/bin/activate\n')
         cwd = os.getcwd()
         ref.write('cd {}\n'.format(cwd))
         hyp_args = '-os {} -bs {} -num_units {} -dropout {} -learn_rate {} -bin_array {} -wt {} -cf {}'.format(*all_hyperparas[i])
