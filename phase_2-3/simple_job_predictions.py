@@ -52,7 +52,7 @@ for f in part_files:
         ref.write('#!/bin/bash\n')
         ref.write('#SBATCH --account=def-jtus\n#SBATCH --nodes=1\n')
         ref.write('#SBATCH --gres=gpu:1     #####  AWARE: MODIFY NAME GPU BASED ON THE USED CLUSTER #####\n')
-        ref.write('#SBATCH --cpus-per-task=3\n#SBATCH --mem-per-cpu=30G\n#SBATCH --time 10:00:00\n#SBATCH --ntasks=1\n')
+        ref.write('#SBATCH --cpus-per-task=3\n#SBATCH --mem=40G\n#SBATCH --time 10:00:00\n#SBATCH --ntasks=1\n')
         ref.write('#SBATCH --mail-user=fab.alt@protonmail.com\n#SBATCH --mail-type=FAIL\n')
         ref.write('source ~/.bashrc\n')
         ref.write('module load cuda cudnn\nsource ~/envDeepDock/bin/activate\n')
