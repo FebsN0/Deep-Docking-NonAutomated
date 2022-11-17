@@ -166,7 +166,7 @@ for i in range(len(all_hyperparas)):
         ref.write('#!/bin/bash\n')
         ref.write('#SBATCH --account=def-jtus\n#SBATCH --nodes=1\n')
         ref.write('#SBATCH --gres=gpu:1     #####  AWARE: MODIFY NAME GPU BASED ON THE USED CLUSTER #####\n')
-        ref.write('#SBATCH --cpus-per-task=5\n#SBATCH --mem=20G\n#SBATCH --time 2:00:00\n#SBATCH --ntasks=1\n')
+        ref.write('#SBATCH --cpus-per-task=4\n#SBATCH --mem=30G\n#SBATCH --time 2:00:00\n#SBATCH --ntasks=1\n')
         ref.write('#SBATCH --mail-user=fab.alt@protonmail.com\n#SBATCH --mail-type=END\n')
         ref.write('module load cuda cudnn\nsource ~/envDeepDock/bin/activate\n')
         cwd = os.getcwd()
